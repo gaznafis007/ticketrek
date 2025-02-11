@@ -3,9 +3,11 @@
 import { createContext, useEffect, useState } from "react";
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile} from 'firebase/auth'
 import { app } from "../Firebase/firebase.config";
+import useAxios from "../hooks/useAxios";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
+    const axiosSecure = useAxios();
     const basicUser = {
         name: 'John Doe',
         email: 'test@mail.com',
@@ -37,8 +39,13 @@ const AuthProvider = ({children}) => {
         logOut
     }
     useEffect(() =>{
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) =>{
             if(currentUser){
+                const res = await axiosSecure.get(`/users?email=${currentUser?.email}`);
+                const newUser = res?.data[0]
+                currentUser.role = newUser?.role
+                setUser(currentUser)
+                console.log(currentUser, 'auth')
                 setLoading(false)
             }
         })

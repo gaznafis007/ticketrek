@@ -2,19 +2,35 @@
 import { useForm } from "react-hook-form"
 import Card from "../../components/ui/Card"
 import Button from "../../components/ui/Button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useContext, useState } from "react"
+import { AuthContext } from "../../context/AuthProvider"
 
 
 const Login = () => {
+  const{login} = useContext(AuthContext);
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data)
+    setLoading(true)
     // Handle login logic here
+    try{
+      const loginResponse = await login(data.email, data.password);
+      if(loginResponse?.user){
+        navigate('/')
+      }
+    }catch(err){
+      console.log(err)
+    }finally{
+      setLoading(false)
+    }
   }
 
   return (
@@ -58,7 +74,7 @@ const Login = () => {
 
             <div>
               <Button className="w-full cursor-pointer" variant="primary" type="submit">
-                Sign in
+                {loading ? 'Loading...' : 'Sign in'}
               </Button>
             </div>
           </form>

@@ -1,19 +1,51 @@
 import { useForm } from "react-hook-form"
 import Card from "../../components/ui/Card"
 import Button from "../../components/ui/Button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useContext, useState } from "react"
+import { AuthContext } from "../../context/AuthProvider"
+import useAxios from "../../hooks/useAxios"
 
 
 const Register = () => {
+  const {register:signUp, getProfile, setUser, user:registeredUser} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const axiosSecure = useAxios()
+  const [loading, setLoading] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    // console.log(data)
+    const user = {
+      name: data.name,
+      email: data.email,
+      password: data.password
+    }
+    // console.log(user, 'my user')
+    setLoading(true)
     // Handle registration logic here
+    try{
+      const signUpResponse = await signUp(data.email, data.password)
+      console.log(signUpResponse)
+      if(signUpResponse?.user){
+         await getProfile(user.name);
+        const res = await axiosSecure.post('/users', user)
+        let newUser = {
+          ...registeredUser
+        }
+        newUser.role = res?.data?.role
+        setUser(newUser)
+        navigate('/')
+      }
+    }catch(error){
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
   }
 
   return (
@@ -75,7 +107,7 @@ const Register = () => {
 
             <div>
               <Button type="submit" className="w-full">
-                Sign up
+                {loading ? 'Loading...' : 'Sign up'}
               </Button>
             </div>
           </form>
