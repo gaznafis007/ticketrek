@@ -43,7 +43,9 @@ const AuthProvider = ({children}) => {
             if(currentUser){
                 const res = await axiosSecure.get(`/users?email=${currentUser?.email}`);
                 const newUser = res?.data[0]
+                console.log(newUser)
                 currentUser.role = newUser?.role
+                currentUser.customerId = newUser?.id
                 setUser(currentUser)
                 console.log(currentUser, 'auth')
                 setLoading(false)

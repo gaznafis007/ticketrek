@@ -38,6 +38,7 @@ const Register = () => {
           ...registeredUser
         }
         newUser.role = res?.data?.role
+        newUser.customerId = res?.data?.id
         setUser(newUser)
         navigate('/')
       }

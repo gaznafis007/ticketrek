@@ -1,13 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import Card from "../../components/ui/Card"
 import Button from "../../components/ui/Button"
-import Loading from "../../components/ui/Loading"
+import useAxios from "../../hooks/useAxios"
+import { AuthContext } from "../../context/AuthProvider"
 
 
 
 const CreateTicket = () => {
+  const {user} = useContext(AuthContext)
+  const axiosSecure = useAxios();
   const {
     register,
     handleSubmit,
@@ -18,12 +21,17 @@ const CreateTicket = () => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true)
+    const ticket = {
+      ...data,
+      customerId: user?.customerId
+    }
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      console.log("Ticket created:", data)
+      // const res = await axiosSecure.post('/tickets', ticket)
+      // console.log("Ticket created:", res?.data)
       // Redirect to tickets page after successful creation
-      navigate("/tickets")
+      // navigate("/tickets")
+      console.log(ticket)
     } catch (error) {
       console.error("Error creating ticket:", error)
       // Handle error (e.g., show error message to user)
@@ -44,7 +52,7 @@ const CreateTicket = () => {
             <input
               type="text"
               id="title"
-              {...register("title", { required: "Title is required" })}
+              {...register("subject", { required: "Title is required" })}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
             {errors.title && <p className="mt-2 text-sm text-red-600">{errors.title.message}</p>}
@@ -85,7 +93,7 @@ const CreateTicket = () => {
               Cancel
             </Button>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? <Loading size="small" /> : "Create Ticket"}
+              {isSubmitting ? 'Creating ticket...' : "Create Ticket"}
             </Button>
           </div>
         </form>
