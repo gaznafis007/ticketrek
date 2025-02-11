@@ -69,12 +69,12 @@ REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
 ### 4️⃣ Run the Application
 #### **Start Backend**
 ```bash
-cd backend
+cd ticketrek-server
 npm start
 ```
 #### **Start Frontend**
 ```bash
-cd frontend
+cd ticketrek-client
 npm start
 ```
 
