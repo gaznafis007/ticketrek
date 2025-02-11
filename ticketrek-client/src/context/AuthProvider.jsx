@@ -4,9 +4,13 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null);
+    const basicUser = {
+        name: 'John Doe',
+        email: 'test@mail.com',
+        role: 'customer'
+    }
+    const [user, setUser] = useState(basicUser);
     const [loading, setLoading] = useState(false)
-
     const value = {
         user,
         setUser,
