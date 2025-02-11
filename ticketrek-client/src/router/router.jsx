@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Tickets from "../Pages/Tickets/Tickets";
 import CreateTicket from "../Pages/CreateTicket/CreateTicket";
+import EditTicket from "../Pages/EditTicket/EditTicket";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
             {
                 path: '/tickets/create',
                 element: <CreateTicket/>
+            },
+            {
+                path: "/tickets/edit/:id",
+                element: <EditTicket/>
             }
         ]
     }
