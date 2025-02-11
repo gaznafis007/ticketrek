@@ -54,8 +54,8 @@ app.get('/tickets/:id', async(req,res) =>{
     try{
         const {id} = req.params
         const ticket = await prisma.ticket.findUnique({
-            where: {id}
-            customer: true
+            where: {id},
+            include: {customer: true}
         })
         res.send(ticket)
     }catch(err){
@@ -128,6 +128,19 @@ app.get('/users', async(req,res) =>{
         return res.send(users)
     }catch(err){
         return res.status(500).send({error: err.message})
+    }
+})
+app.get('/users', async(req, res) =>{
+    try{
+        const {email} = req.query;
+        if(email){
+            const user = await prisma.user.findUnique({
+                where: {email},
+            })
+            return res.send(user)
+        }
+    }catch(err){
+        res.status(500).send({error: err.message})
     }
 })
 app.listen(port, () =>{
