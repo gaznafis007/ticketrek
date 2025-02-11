@@ -49,6 +49,19 @@ app.post('/tickets', async (req,res) =>{
         return res.status(500).send({error: err.message})
     }
 })
+// target ticket
+app.get('/tickets/:id', async(req,res) =>{
+    try{
+        const {id} = req.params
+        const ticket = await prisma.ticket.findUnique({
+            where: {id}
+            customer: true
+        })
+        res.send(ticket)
+    }catch(err){
+        res.status(500).send({error: err.message})
+    }
+})
 // update tickets
 app.put('/tickets/:id', async(req,res) =>{
     try{
