@@ -6,6 +6,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Tickets from "../Pages/Tickets/Tickets";
+import CreateTicket from "../Pages/CreateTicket/CreateTicket";
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             {
                 path: '/tickets',
                 element: <Tickets/>
+            },
+            {
+                path: '/tickets/create',
+                element: <CreateTicket/>
             }
         ]
     }
