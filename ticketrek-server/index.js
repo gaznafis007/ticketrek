@@ -17,15 +17,22 @@ app.get('/', (req, res) =>{
 // get tickets
 app.get('/tickets', async(req,res) =>{
     try{
+        const {email} = req.query;
+        if(email){
+            const tickets = await prisma.ticket.findMany({
+                where: {customer: email},
+                include: {customer: true}
+            });
+            return res.send(tickets)
+        }
         const tickets = await prisma.ticket.findMany({
             include: {customer: true}
         });
-        res.send(tickets)
+        return res.send(tickets)
     }catch(err){
-            req.status(500).send({error: err.message})
+            return req.status(500).send({error: err.message})
     }
 })
-
 // create tickets
 app.post('/tickets', async (req,res) =>{
     try{
@@ -39,22 +46,75 @@ app.post('/tickets', async (req,res) =>{
         });
         res.send(ticket)
     }catch(err){
-        res.status(500).send({error: err.message})
+        return res.status(500).send({error: err.message})
     }
 })
+// update tickets
+app.put('/tickets/:id', async(req,res) =>{
+    try{
+        const {id} = req.params;
+        const {subject, description} = req.body
+        const updatedTicket = await prisma.ticket.update({
+            where: {id},
+            data: {subject, description}
+        });
 
+        return res.send(updatedTicket)
+    }catch(err){
+        return res.status(500).send({error: err.message})
+    }
+})
+// update ticket status
+app.put('/tickets/:id/status', async(req,res) =>{
+    try{
+        const {id} = req.params;
+        const {status} = req.body;
+        const updatedTicketStatus = await prisma.ticket.update({
+            where: {id},
+            data: {status}
+        })
+        return res.send(updatedTicketStatus)
+    }catch(err){
+        return res.status(500).send({error: err.message})
+    }
+})
+// delete a ticket
+app.delete('/tickets/:id', async(req,res) =>{
+    try{
+        const {id} = req.params;
+        await prisma.ticket.delete({
+            where: {id}
+        })
+        return req.send({deletedCount: 1, message: "Ticket is deleted successfully"})
+    }catch(err){
+        return res.status(500).send({error: err.message})
+    }
+})
+// create user
 app.post('/users', async(req, res) =>{
     try{
-        const {name, email} = req.body;
+        const {name, email, password} = req.body;
         const user = await prisma.user.create({
             data:{
                 name,
-                email
+                email,
+                password
             }
         })
         res.send(user)
     }catch(err){
-        res.status(500).send({error: err.message})
+        return res.status(500).send({error: err.message})
+    }
+})
+// get user
+app.get('/users', async(req,res) =>{
+    try{
+        const users = await prisma.user.findMany({
+            select: {name: true, email: true, role: true}
+        });
+        return res.send(users)
+    }catch(err){
+        return res.status(500).send({error: err.message})
     }
 })
 app.listen(port, () =>{
