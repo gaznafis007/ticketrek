@@ -4,6 +4,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import Loading from "../../components/ui/Loading"
 import Card from "../../components/ui/Card"
 import Button from "../../components/ui/Button"
+import useAxios from "../../hooks/useAxios"
+import { useContext } from "react"
+import { AuthContext } from "../../context/AuthProvider"
 
 
 const EditTicket = () => {
@@ -13,26 +16,29 @@ const EditTicket = () => {
     formState: { errors },
     reset,
   } = useForm()
+  const {user} = useContext(AuthContext)
   const [isLoading, setIsLoading] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
+  const axiosSecure = useAxios()
   const { id } = useParams()
 
   useEffect(() => {
     const fetchTicket = async () => {
       try {
         // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        // await new Promise((resolve) => setTimeout(resolve, 1000))
 
         // Mock data - replace with actual API call
-        const ticketData = {
-          title: "Sample Ticket",
-          description: "This is a sample ticket description.",
-          priority: "medium",
-          status: "open",
-        }
+        const res = await axiosSecure(`/tickets/${id}`)
+        // const ticketData = {
+        //   title: "Sample Ticket",
+        //   description: "This is a sample ticket description.",
+        //   priority: "medium",
+        //   status: "open",
+        // }
 
-        reset(ticketData)
+        reset(res?.data)
         setIsLoading(false)
       } catch (error) {
         console.error("Error fetching ticket:", error)
@@ -48,8 +54,8 @@ const EditTicket = () => {
     setIsSubmitting(true)
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      console.log("Ticket updated:", { id, ...data })
+      const res = await axiosSecure.put(`/tickets/${id}`, data)
+      console.log("Ticket updated:",  res?.data )
       // Redirect to tickets page after successful update
       navigate("/tickets")
     } catch (error) {
@@ -79,8 +85,8 @@ const EditTicket = () => {
             </label>
             <input
               type="text"
-              id="title"
-              {...register("title", { required: "Title is required" })}
+              id="subject"
+              {...register("subject", { required: "Title is required" })}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
             {errors.title && <p className="mt-2 text-sm text-red-600">{errors.title.message}</p>}
@@ -115,7 +121,9 @@ const EditTicket = () => {
             {errors.priority && <p className="mt-2 text-sm text-red-600">{errors.priority.message}</p>}
           </div>
 
-          <div>
+          {
+            user?.role === 'admin' && (
+              <div>
             <label htmlFor="status" className="block text-sm font-medium text-gray-700">
               Status
             </label>
@@ -131,13 +139,15 @@ const EditTicket = () => {
             </select>
             {errors.status && <p className="mt-2 text-sm text-red-600">{errors.status.message}</p>}
           </div>
+            )
+          }
 
           <div className="flex items-center justify-end">
             <Button type="button" variant="secondary" onClick={() => navigate("/tickets")} className="mr-4">
               Cancel
             </Button>
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? <Loading size="small" /> : "Update Ticket"}
+              {isSubmitting ? 'Updating....' : "Update Ticket"}
             </Button>
           </div>
         </form>

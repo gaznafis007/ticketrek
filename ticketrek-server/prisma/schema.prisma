@@ -20,6 +20,7 @@ model Ticket {
   id          String  @id @default(uuid())
   subject     String
   description String
+  priority    String
   status      String  @default("Open")
   customerId  String
   customer    User    @relation(fields: [customerId], references: [id])

@@ -42,7 +42,7 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) =>{
             if(currentUser){
                 const res = await axiosSecure.get(`/users?email=${currentUser?.email}`);
-                const newUser = res?.data[0]
+                const newUser = res?.data
                 console.log(newUser)
                 currentUser.role = newUser?.role
                 currentUser.customerId = newUser?.id

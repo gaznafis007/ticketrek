@@ -10,13 +10,13 @@ const Dashboard = () => {
     if(loading){
         return <Loading></Loading>
     }
-    if(user?.role === 'admin'){
+    if(user?.uid && user?.role === 'admin'){
         return <AdminDashboard></AdminDashboard>
     }
-    if(user?.role === 'customer'){
+    if(user?.uid && user?.role === 'customer'){
         return <CustomerDashboard></CustomerDashboard>
     }
-    if(!user?.role){
+    if( !user?.role){
         return <Navigate to='/login'></Navigate>
     }
 };

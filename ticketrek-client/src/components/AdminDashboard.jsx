@@ -2,8 +2,16 @@
 import { FaTicketAlt, FaUsers, FaChartBar } from "react-icons/fa"
 import Card from "./ui/Card"
 import Button from "./ui/Button"
+import { useNavigate } from "react-router-dom"
 
 const AdminDashboard = () => {
+  const navigate = useNavigate()
+  const handleViewTickets = () =>{
+    navigate('/allTickets')
+  }
+  const handleViewUsers = () =>{
+    navigate('/allUsers')
+  }
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Admin Dashboard</h1>
@@ -17,7 +25,7 @@ const AdminDashboard = () => {
             <FaTicketAlt className="text-4xl text-indigo-600" />
           </div>
           <div className="mt-4">
-            <Button>View All Tickets</Button>
+            <Button onClick={handleViewTickets}>View All Tickets</Button>
           </div>
         </Card>
         <Card>
@@ -29,7 +37,7 @@ const AdminDashboard = () => {
             <FaUsers className="text-4xl text-indigo-600" />
           </div>
           <div className="mt-4">
-            <Button>Manage Users</Button>
+            <Button onClick={handleViewUsers}>Manage Users</Button>
           </div>
         </Card>
         <Card>

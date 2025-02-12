@@ -27,10 +27,9 @@ const CreateTicket = () => {
     }
     try {
       // Simulate API call
-      // const res = await axiosSecure.post('/tickets', ticket)
-      // console.log("Ticket created:", res?.data)
-      // Redirect to tickets page after successful creation
-      // navigate("/tickets")
+      const res = await axiosSecure.post('/tickets', ticket)
+      console.log("Ticket created:", res?.data)
+      navigate("/tickets")
       console.log(ticket)
     } catch (error) {
       console.error("Error creating ticket:", error)
