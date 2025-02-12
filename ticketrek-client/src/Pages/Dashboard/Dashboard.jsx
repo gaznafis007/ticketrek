@@ -16,7 +16,7 @@ const Dashboard = () => {
     if(user?.uid && user?.role === 'customer'){
         return <CustomerDashboard></CustomerDashboard>
     }
-    if( !user?.role){
+    if(!user?.role){
         return <Navigate to='/login'></Navigate>
     }
 };

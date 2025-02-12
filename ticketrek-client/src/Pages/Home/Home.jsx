@@ -17,7 +17,7 @@ const Home = () => {
               inquiries and track issues in real-time.
             </p>
             <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
-              <div className="rounded-md shadow">
+              <div className="md:rounded-md md:shadow">
                 <Link to="/register">
                   <Button variant="primary">Get Started</Button>
                 </Link>

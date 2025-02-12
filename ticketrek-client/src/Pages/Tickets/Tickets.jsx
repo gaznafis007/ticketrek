@@ -66,6 +66,9 @@ const Tickets = () => {
             </div>
           </Card>
         ))}
+        {
+          !tickets && <p className="text-center text-blue-500 font-semibold text-3xl">No ticket found</p>
+        }
       </div>
     </div>
   )

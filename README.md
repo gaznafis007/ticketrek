@@ -1,44 +1,64 @@
-# TickeTrek - Role-Based Complaint Management System
+# 🎟️ TickeTrek - Role-Based Complaint Management System
 
 ## 🚀 Overview
-TickeTrek is a web-based **Support Ticketing System** that allows customers to submit complaints and admins to manage and resolve them efficiently. The system ensures **role-based access control**, **secure authentication**, and **CRUD operations** for ticket management.
+**TickeTrek** is a web-based **Support Ticketing System** designed to streamline complaint management. It enables **customers** to submit complaints and **admins** to efficiently track, respond, and resolve them. The system ensures **role-based access control**, **secure authentication**, and full **CRUD operations** for ticket handling.
 
 ## 🛠 Tech Stack
-- **Frontend:** React.js, Tailwind CSS, React Router, Axios
-- **Backend:** Node.js, Express.js, MySQL, Prisma ORM
-- **Authentication:** Firebase Auth (JWT-based authentication)
-- **UI Framework:** Shopify Polaris (or Tailwind CSS components)
+### 🌐 Frontend
+- **React.js** - Component-based UI
+- **Vite** - Fast build tool
+- **Tailwind CSS** - Modern styling framework
+- **React Router** - Navigation and routing
+- **Axios** - API calls & data fetching
+
+### 🖥 Backend
+- **Node.js & Express.js** - REST API
+- **MySQL & Prisma ORM** - Database & Query management
+- **Firebase Auth** - Secure authentication with JWT
+
+### 🎨 UI Framework
+- **Shopify Polaris** *(or Tailwind components)* for a sleek UI
 
 ## 📌 Features
-### 🔹 Authentication & Role Management
-- Firebase authentication (Email/Password Login)
-- Role-based access (Admin & Customer)
+### 🔹 Authentication & Role-Based Access
+- Firebase **email/password authentication**
+- Role-based access (**Admin & Customer**)
 
 ### 🔹 Customer Features
-- Submit new complaint tickets
-- View & delete their own tickets
-- Automatic assignment to an Admin
+✅ Submit new **complaint tickets**  
+✅ View & delete their own **tickets**  
+✅ Automatic **assignment to an Admin**  
 
 ### 🔹 Admin Features
-- View all submitted tickets
-- Respond to tickets with messages
-- Update ticket status (**Open, Resolved, Closed**)
-- Manage customer complaints via the dashboard
+✅ View **all submitted tickets**  
+✅ Respond to **customer complaints**  
+✅ Update ticket status (**Open, Resolved, Closed**)  
+✅ **Manage customer requests** efficiently  
 
 ### 🔹 Additional Features
-- Secure authentication with JWT
-- Role-based dashboard views
-- Search & Filter tickets (Bonus)
-- Real-time updates (Bonus)
+🔹 Secure **JWT authentication**  
+🔹 **Role-based dashboards** for better user experience  
+🔹 **Search & Filter** tickets *(Bonus Feature)*  
+🔹 **Real-time updates** *(Bonus Feature)*  
+
+---
+
+## 🌍 Live Links
+🔗 **Frontend:** [TickeTrek Live](https://ticketrek.vercel.app/)  
+🔗 **Backend API:** [TickeTrek Server](https://ticketrek-server.vercel.app)  
+🔗 **GitHub Repository:** [TickeTrek Repo](https://github.com/gaznafis007/ticketrek)  
+
+---
 
 ## 🎯 Installation & Setup
-### 1️⃣ Clone the Repository
+### 🛠 1️⃣ Clone the Repository
 ```bash
+# Clone the project
 git clone https://github.com/gaznafis007/ticketrek.git
 cd ticketrek
 ```
 
-### 2️⃣ Install Dependencies
+### 📦 2️⃣ Install Dependencies
 #### **Frontend**
 ```bash
 cd ticketrek-client
@@ -50,8 +70,9 @@ cd ticketrek-server
 npm install
 ```
 
-### 3️⃣ Configure Environment Variables
-Create a `.env` file in both `frontend` and `backend` folders.
+### ⚙️ 3️⃣ Configure Environment Variables
+Create a `.env` file in both **frontend** and **backend** directories.
+
 #### **Backend (`ticketrek-server/.env`)**
 ```
 PORT=5000
@@ -66,7 +87,7 @@ REACT_APP_FIREBASE_API_KEY=your_api_key
 REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
 ```
 
-### 4️⃣ Run the Application
+### 🚀 4️⃣ Run the Application
 #### **Start Backend**
 ```bash
 cd ticketrek-server
@@ -78,13 +99,26 @@ cd ticketrek-client
 npm start
 ```
 
-## 🔥 Deployment
-- **Frontend:** Deploy on **Vercel/Netlify**
-- **Backend:** Deploy on **Railway/Vercel/AWS**
+---
+
+## 🚢 Deployment
+- **Frontend:** Deployed on **Vercel**  
+- **Backend:** Deployed on **Vercel/Railway/AWS**  
+
+---
+
+## 🤝 Contributing
+We welcome contributions! If you'd like to improve TickeTrek, feel free to:
+- Submit an **issue**
+- Open a **pull request**
+- Suggest **enhancements & features** 🎉
+
+---
 
 ## 📜 License
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
-## 📩 Contributing
-Feel free to submit issues or pull requests to improve TickeTrek! 🎉
+---
+
+### 🎯 Made with ❤️ by [Your Name/Team]
 
