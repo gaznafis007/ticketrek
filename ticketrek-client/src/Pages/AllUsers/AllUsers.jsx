@@ -1,11 +1,7 @@
-"use client"
-
-import { useState, useEffect } from "react"
-
-import { FaTrash } from "react-icons/fa"
+import { useState, useEffect,} from "react"
 import Loading from "../../components/ui/Loading"
-import Button from "../../components/ui/Button"
 import useAxios from "../../hooks/useAxios"
+
 
 const AllUsers = () => {
   const [users, setUsers] = useState([])
@@ -43,7 +39,6 @@ const AllUsers = () => {
       </div>
     )
   }
-
   return (
     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">All Users</h1>
