@@ -9,7 +9,7 @@ const prisma = new PrismaClient()
 // middleware
 app.use(cors(
     {
-        origin: ['http://localhost:5173'],
+        origin: ['http://localhost:5173', 'https://ticketrek.vercel.app'],
         methods: "GET, POST, PUT, DELETE, PATCH",
         allowedHeaders: "Content-Type,Authorization"
     }
