@@ -1,12 +1,19 @@
 const express = require('express');
 const port = process.env.PORT || 5000;
 const cors = require('cors');
-const {PrismaClient} = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
 const app = express();
 require('dotenv').config()
 const prisma = new PrismaClient()
+
 // middleware
-app.use(cors())
+app.use(cors(
+    {
+        origin: ['http://localhost:5173'],
+        methods: "GET, POST, PUT, DELETE, PATCH",
+        allowedHeaders: "Content-Type,Authorization"
+    }
+))
 app.use(express.json())
 
 // test API

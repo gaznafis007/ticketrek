@@ -18,11 +18,12 @@ const Login = () => {
   } = useForm()
 
   const onSubmit = async (data) => {
-    console.log(data)
+    // console.log(data)
     setLoading(true)
     // Handle login logic here
     try{
       const loginResponse = await login(data.email, data.password);
+      console.log(loginResponse.user)
       if(loginResponse?.user){
         navigate('/')
       }

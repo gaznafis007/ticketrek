@@ -8,13 +8,13 @@ import useAxios from "../hooks/useAxios";
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
     const axiosSecure = useAxios();
-    const basicUser = {
-        name: 'John Doe',
-        email: 'test@mail.com',
-        role: 'admin'
-    }
+    // const basicUser = {
+    //     name: 'John Doe',
+    //     email: 'test@mail.com',
+    //     role: 'admin'
+    // }
     const auth = getAuth(app);
-    const [user, setUser] = useState(basicUser);
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const register = (email, password) =>{
         return createUserWithEmailAndPassword(auth, email, password)

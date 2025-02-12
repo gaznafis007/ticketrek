@@ -8,7 +8,7 @@ import useAxios from "../../hooks/useAxios"
 
 
 const Register = () => {
-  const {register:signUp, getProfile, setUser, user:registeredUser} = useContext(AuthContext)
+  const {register:signUp, getProfile, setUser} = useContext(AuthContext)
   const navigate = useNavigate()
   const axiosSecure = useAxios()
   const [loading, setLoading] = useState(false)
@@ -35,8 +35,9 @@ const Register = () => {
          await getProfile(user.name);
         const res = await axiosSecure.post('/users', user)
         let newUser = {
-          ...registeredUser
+          ...signUpResponse?.user
         }
+        console.log(newUser)
         newUser.role = res?.data?.role
         newUser.customerId = res?.data?.id
         setUser(newUser)
